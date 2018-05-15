@@ -12,6 +12,9 @@ export class AppComponent implements OnInit {
   taskDetails: any;
   hide: any;
   taskID: any;
+  newTask: any;
+  edit: any;
+  editTask: any;
 
   constructor(private _httpService: HttpService){}
 
@@ -23,8 +26,18 @@ export class AppComponent implements OnInit {
       completed: "",
       createdAt: ""
     }
+    this.newTask = {
+      title: "",
+      description: ""
+    }
+    this.editTask = {
+      id: "",
+      title: "",
+      description: ""
+    }
     this.hide = true
     this.taskID = ""
+    this.edit = false
   }
   
   getTasksFromService(){
@@ -36,18 +49,23 @@ export class AppComponent implements OnInit {
         console.log(this.tasks)
    });
   }
-  searchForTask(){
+/*   searchForTask(){
     console.log(this.taskID)
     this._httpService.getTask(this.taskID)
       .subscribe(data=>{
-        this.taskID = ""
-        console.log("Success! Tasks:", data);
-        this.tasks = [data];
-        this.showTaskDetails(0);
-        console.log(this.tasks)
+        if (data._id) {
+          this.taskID = ""
+          console.log("Success! Tasks:", data);
+          this.tasks = [data];
+          this.showTaskDetails(0);
+          console.log(this.tasks)
+        }
+        else {
+          console.log(data) // work for ID's not in the system
+        }
       })
 
-  }
+  } */
 
   deleteTaskFromService(id){
     this._httpService.deleteTask(id)
@@ -76,6 +94,31 @@ export class AppComponent implements OnInit {
   }
   hideTasks(){
     this.tasks = [];
+  }
+  addNewTask(){
+    this._httpService.addTask(this.newTask)
+      .subscribe(data => {
+        console.log(data);
+      })
+  }
+
+  editTaskFromService(idx){
+    this.editTask.id = this.tasks[idx]._id
+    this.editTask.title = this.tasks[idx].title
+    this.editTask.description = this.tasks[idx].description
+    this.edit = true
+  }
+
+  updateTaskFromService(){
+    this._httpService.updateTask(this.editTask)
+      .subscribe(data => {
+        console.log(data);
+        this.getTasksFromService();
+      })
+  }
+
+  closeEdit(){
+    this.edit = false;
   }
 
 } 

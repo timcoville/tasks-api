@@ -12,9 +12,11 @@ module.exports = {
     },
     get: (req, res)=>{
         Task.findOne({_id: req.params.id}, (err, data)=>{
-            if(err){console.log(err)}
+            if(err){
+                res.json(err)
+            }
             else{
-                res.json(data)
+                res.json(data);
             }
         });
     },
@@ -23,8 +25,8 @@ module.exports = {
             if(err){console.log(err)}
             else{
 
-                Task.update(data, {title: req.body.title, description: req.body.description, completed: req.body.completed }, (err, data)=>{
-                    if(err){console.log(err)}
+                Task.update(data, {title: req.body.title, description: req.body.description}, (err, data)=>{
+                    if(err){res.json(err)}
                     else{
                         res.json(data)
                     }
@@ -33,10 +35,10 @@ module.exports = {
         });
     },
     post: (req, res)=>{
-        Task.create({title: req.body.title, description: req.body.description, completed: req.body.completed }, (err, data)=>{
+        Task.create({title: req.body.title, description: req.body.description}, (err, data)=>{
             if(err){console.log(err)}
             else{
-                res.redirect('/tasks')
+                res.json(data)
             } 
         });
     },

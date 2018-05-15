@@ -1,17 +1,39 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div id="wrapper">
-  <div style="text-align:center">
+  <div>
     <h1>
       Welcome to {{ title }}!
     </h1>
-  <button (click)="getTasksFromService()">Get Tasks</button>
-  <button (click)="hideTasks()">Hide Tasks</button>
-    <form (submit)="searchForTask()">
-      <input type="text" name="taskID" [(ngModel)]="taskID">
-      <button>Search for Task</button>
-    </form>
+  <!--     <form (submit)="searchForTask()">
+          <input type="text" name="taskID" [(ngModel)]="taskID">
+          <button>Search for Task</button>
+        </form> -->
+
+    <div class="task">
+      <h2>Create New Task</h2>
+      <form (submit)="addNewTask()">
+          <p>Title: <input type="text" name="newTask.title" [(ngModel)]="newTask.title"></p>
+          <p>Description: <input type="text" name="newTask.description" [(ngModel)]="newTask.description"></p>
+           <button>Add Task</button>
+      </form>
+    </div>
+  <span *ngIf="edit">
+      <div class="task">
+        <h2>Edit Task</h2>
+        <form (submit)="updateTaskFromService()">
+            <p>Title: <input type="text" name="editTask.title" [(ngModel)]="editTask.title"></p>
+            <p>Description: <input type="text" name="editTask.description" [(ngModel)]="editTask.description"></p>
+            <button>Edit Task</button> <button (click)="closeEdit()">Close Edit</button>
+        </form>
+        
+      </div>
+    </span>
+  <div class="menu">
+    <button (click)="getTasksFromService()">Get Tasks</button>
+    <button (click)="hideTasks()">Hide Tasks</button>
+  </div>
   <div class="tasks" *ngFor="let task of tasks; let i = index" >
-    <hr>
+
     <h5>Task: {{i+1}}</h5>
     <h1>{{task.title}}</h1>
 
@@ -23,7 +45,11 @@
         <h3>Completed: {{task.completed}}</h3>
         <h4>{{task.createdAt |date:'MM/dd/yyyy @ h:mma' }}</h4>
       </span>
+      <span *ngIf="taskDetails.id != task._id">
       <button (click)="showTaskDetails(i)">Show Details</button> 
+    </span>
+      <br>
+      <button (click)="editTaskFromService(i)">Edit Task</button>
       <br>
       <button (click)="deleteTaskFromService(task._id)">Delete Task</button>
   </div>

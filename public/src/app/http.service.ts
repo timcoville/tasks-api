@@ -20,4 +20,11 @@ export class HttpService {
   getTask(id){
     return this._http.get('/tasks/'+id);
   }
+
+  addTask(data){
+    return this._http.post('/tasks', data);
+  }
+  updateTask(data){
+    return this._http.put('/tasks/'+data.id, data);
+  }
 }
