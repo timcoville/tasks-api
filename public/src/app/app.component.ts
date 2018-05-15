@@ -30,6 +30,7 @@ export class AppComponent implements OnInit {
   getTasksFromService(){
     this._httpService.getTasks()
       .subscribe(data => {
+        this.taskDetails.id = -1
         console.log("Success! Tasks:", data);
         this.tasks = data;
         console.log(this.tasks)
@@ -42,6 +43,7 @@ export class AppComponent implements OnInit {
         this.taskID = ""
         console.log("Success! Tasks:", data);
         this.tasks = [data];
+        this.showTaskDetails(0);
         console.log(this.tasks)
       })
 
