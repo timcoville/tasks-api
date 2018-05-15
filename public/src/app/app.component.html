@@ -1,0 +1,16 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div id="wrapper">
+  <div style="text-align:center">
+    <h1>
+      Welcome to {{ title }}!
+    </h1>
+ 
+
+  <div class="tasks" *ngFor="let task of tasks">
+    <h1>{{task.title}}</h1>
+    <h2>{{task.description}}</h2>
+    <h3>{{task.completed}}</h3>
+    <h4>{{task.createdAt |date:'MM/dd/yyyy @ h:mma' }}</h4>
+
+  </div>
+</div>

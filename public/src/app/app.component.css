@@ -1,0 +1,9 @@
+#wrapper {
+    font-family: sans-serif;
+    width: 400px;
+    margin: 0 auto;
+}
+
+.tasks {
+    font-size: .7em;
+}
