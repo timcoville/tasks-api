@@ -17,4 +17,7 @@ export class HttpService {
   deleteTask(id){
     return this._http.get('/task/'+id);
   }
+  getTask(id){
+    return this._http.get('/tasks/'+id);
+  }
 }

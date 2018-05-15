@@ -4,17 +4,27 @@
     <h1>
       Welcome to {{ title }}!
     </h1>
-  <button (click)="getTasksFromService()">Get Tasks</button> <button (click)="hideTasks()">Hide Tasks</button>
- 
-
+  <button (click)="getTasksFromService()">Get Tasks</button>
+  <button (click)="hideTasks()">Hide Tasks</button>
+    <form (submit)="searchForTask()">
+      <input type="text" name="taskID" [(ngModel)]="taskID">
+      <button>Search for Task</button>
+    </form>
   <div class="tasks" *ngFor="let task of tasks; let i = index" >
     <hr>
     <h5>Task: {{i+1}}</h5>
-    <h1>Task Title: {{task.title}}</h1>
+    <h1>{{task.title}}</h1>
 
-    <h2>Description: {{task.description}}</h2>
-    <h3>Completed: {{task.completed}}</h3>
-    <h4>{{task.createdAt |date:'MM/dd/yyyy @ h:mma' }}</h4>
-    <button (click)="deleteTaskFromService(task._id)">Delete Task</button>
+    
+
+      <span *ngIf="taskDetails.id == task._id">
+        <button (click)="hideTaskDetails()">Close Details</button>
+        <h2>Description: {{task.description}}</h2>
+        <h3>Completed: {{task.completed}}</h3>
+        <h4>{{task.createdAt |date:'MM/dd/yyyy @ h:mma' }}</h4>
+      </span>
+      <button (click)="showTaskDetails(i)">Show Details</button> 
+      <br>
+      <button (click)="deleteTaskFromService(task._id)">Delete Task</button>
   </div>
 </div>
