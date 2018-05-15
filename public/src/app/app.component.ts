@@ -7,12 +7,19 @@ import { HttpService } from './http.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'Task API';
-  tasks = [];
+  title: any;
+  tasks: any;
+  task: any;
+
   constructor(private _httpService: HttpService){}
 
   ngOnInit(){
-    this.getTasksFromService();
+    this.title = "Tasks API"
+    this.task = {
+      description: "",
+      completed: "",
+      createdAt: ""
+    }
   }
   
   getTasksFromService(){
@@ -21,6 +28,18 @@ export class AppComponent implements OnInit {
         console.log("Success! Tasks:", data);
         this.tasks = data;
         console.log(this.tasks)
-      );
+   });
   }
-}
+
+  deleteTaskFromService(id){
+    this._httpService.deleteTask(id)
+      .subscribe(data=>{
+        this.getTasksFromService();
+      });
+  }
+
+  hideTasks(){
+    this.tasks = [];
+  }
+
+} 

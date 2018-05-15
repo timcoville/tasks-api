@@ -5,5 +5,5 @@ module.exports = function(app){
     app.get('/tasks/:id', cont.get);
     app.put('/tasks/:id', cont.put);
     app.post('/tasks', cont.post);
-    app.delete('/tasks/:id', cont.delete);
+    app.get('/task/:id', cont.delete);
 };

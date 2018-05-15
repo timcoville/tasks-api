@@ -13,4 +13,8 @@ export class HttpService {
   getTasks(){
     return this._http.get('/tasks');
   }
+
+  deleteTask(id){
+    return this._http.get('/task/'+id);
+  }
 }

@@ -4,13 +4,17 @@
     <h1>
       Welcome to {{ title }}!
     </h1>
+  <button (click)="getTasksFromService()">Get Tasks</button> <button (click)="hideTasks()">Hide Tasks</button>
  
 
-  <div class="tasks" *ngFor="let task of tasks">
-    <h1>{{task.title}}</h1>
-    <h2>{{task.description}}</h2>
-    <h3>{{task.completed}}</h3>
-    <h4>{{task.createdAt |date:'MM/dd/yyyy @ h:mma' }}</h4>
+  <div class="tasks" *ngFor="let task of tasks; let i = index" >
+    <hr>
+    <h5>Task: {{i+1}}</h5>
+    <h1>Task Title: {{task.title}}</h1>
 
+    <h2>Description: {{task.description}}</h2>
+    <h3>Completed: {{task.completed}}</h3>
+    <h4>{{task.createdAt |date:'MM/dd/yyyy @ h:mma' }}</h4>
+    <button (click)="deleteTaskFromService(task._id)">Delete Task</button>
   </div>
 </div>
