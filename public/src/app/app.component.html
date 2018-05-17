@@ -32,12 +32,12 @@
     <button (click)="getTasksFromService()">Get Tasks</button>
     <button (click)="hideTasks()">Hide Tasks</button>
   </div>
-  <div class="tasks" *ngFor="let task of tasks; let i = index" >
+    <div class="tasks" *ngFor="let task of tasks; let i = index" >
 
     <h5>Task: {{i+1}}</h5>
     <h1>{{task.title}}</h1>
 
-    
+
 
       <span *ngIf="taskDetails.id == task._id">
         <button (click)="hideTaskDetails()">Close Details</button>
@@ -52,5 +52,7 @@
       <button (click)="editTaskFromService(i)">Edit Task</button>
       <br>
       <button (click)="deleteTaskFromService(task._id)">Delete Task</button>
-  </div>
+    </div>
 </div>
+
+<app-task *ngIf="selectedTask" [taskToShow]='selectedTask'></app-task>

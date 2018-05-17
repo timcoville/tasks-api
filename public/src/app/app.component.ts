@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
   newTask: any;
   edit: any;
   editTask: any;
+  selectedTask: any;
 
   constructor(private _httpService: HttpService){}
 
@@ -38,6 +39,7 @@ export class AppComponent implements OnInit {
     this.hide = true
     this.taskID = ""
     this.edit = false
+
   }
   
   getTasksFromService(){
@@ -46,6 +48,8 @@ export class AppComponent implements OnInit {
         this.taskDetails.id = -1
         console.log("Success! Tasks:", data);
         this.tasks = data;
+        this.selectedTask = data[0]
+        console.log(this.selectedTask)
         console.log(this.tasks)
    });
   }

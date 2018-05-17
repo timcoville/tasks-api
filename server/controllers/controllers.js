@@ -13,7 +13,7 @@ module.exports = {
     get: (req, res)=>{
         Task.findOne({_id: req.params.id}, (err, data)=>{
             if(err){
-                res.json(err)
+                res.json(err);
             }
             else{
                 res.json(data);
